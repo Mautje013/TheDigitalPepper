@@ -8,7 +8,7 @@ import Container from "./Container";
 const links = [
   { href: "/", label: "Home" },
   { href: "/expertise", label: "Expertise", scrollTo: "digital-compass-explainer" },
-  { href: "/over-ons", label: "Over ons" },
+ // { href: "/over-ons", label: "Over ons" },
   { href: "/contact", label: "Contact", cta: true },
 ];
 

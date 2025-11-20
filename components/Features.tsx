@@ -457,8 +457,7 @@ function ServiceCard({
   const shouldHighlight = isHovered || isHighlighted;
 
   return (
-    <Link
-      href={item.link}
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`
@@ -520,7 +519,7 @@ function ServiceCard({
           {item.desc}
         </p>
       </div>
-    </Link>
+    </div>
   );
 }
 

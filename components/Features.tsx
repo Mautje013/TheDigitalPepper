@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Container from "./Container";
 
@@ -245,8 +244,7 @@ function CarouselRow({
               }
             }}
           >
-            <Link
-              href={link}
+            <div
               className={`
                 carousel-item flex-shrink-0 px-5 py-2.5 rounded-lg cursor-pointer
                 transition-all duration-300 ease-out relative
@@ -264,7 +262,7 @@ function CarouselRow({
               >
                 {service}
               </span>
-            </Link>
+            </div>
             
             {/* Tooltip */}
             {tooltip && (

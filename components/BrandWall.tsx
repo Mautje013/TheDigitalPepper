@@ -246,13 +246,13 @@ function LogoCard({ logo, index }: { logo: typeof logos[0]; index: number }) {
         animationFillMode: 'forwards',
       }}
     >
-      <div className="relative w-full h-[166px] md:h-[208px] flex items-center justify-center">
+      <div className="flex items-center justify-center h-28">
         <Image
           src={logo.src}
           alt={logo.alt}
-          width={364}
-          height={182}
-          className="object-contain max-w-full w-auto h-16 transition-all duration-300 group-hover:scale-105"
+          width={200}
+          height={100}
+          className="h-24 w-auto md:h-28 mx-auto object-contain transition-all duration-300 group-hover:scale-105"
           style={logo.applyFilter 
             ? { filter: 'invert(1) brightness(0) invert(1)' } 
             : logo.removeWhiteBg

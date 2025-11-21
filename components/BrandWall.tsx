@@ -252,7 +252,7 @@ function LogoCard({ logo, index }: { logo: typeof logos[0]; index: number }) {
           alt={logo.alt}
           width={200}
           height={100}
-          className="h-24 w-auto md:h-28 mx-auto object-contain transition-all duration-300 group-hover:scale-105"
+          className="h-28 w-auto md:h-32 mx-auto object-contain transition-all duration-300 group-hover:scale-105"
           style={logo.applyFilter 
             ? { filter: 'invert(1) brightness(0) invert(1)' } 
             : logo.removeWhiteBg

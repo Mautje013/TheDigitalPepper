@@ -1,8 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 import Container from "./Container";
+
+function isMobile() {
+  return typeof window !== "undefined" && window.innerWidth < 768;
+}
 
 // Service mapping to main categories
 const serviceLinks: Record<string, string> = {
@@ -563,7 +568,7 @@ export default function Features() {
           <CarouselRow 
             services={allServicesRow1} 
             rowIndex={1} 
-            speed={0.6}
+            speed={isMobile() ? 1.2 : 0.6}
             onServiceHover={handleServiceHover}
           />
 
@@ -571,7 +576,7 @@ export default function Features() {
           <CarouselRow 
             services={allServicesRow2} 
             rowIndex={2} 
-            speed={-0.6}
+            speed={isMobile() ? -1.2 : -0.6}
             onServiceHover={handleServiceHover}
           />
 
@@ -579,7 +584,7 @@ export default function Features() {
           <CarouselRow 
             services={allServicesRow3} 
             rowIndex={3} 
-            speed={0.6}
+            speed={isMobile() ? 1.2 : 0.6}
             onServiceHover={handleServiceHover}
           />
 

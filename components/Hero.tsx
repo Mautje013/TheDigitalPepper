@@ -34,7 +34,7 @@ export default function Hero() {
             {/* CTA Button - Under subheader */}
             <div className="animate-slide-up [animation-delay:0.3s]">
               <a
-                href="#contact"
+                href="https://digitalpepper.nl/contact/"
                 className="bg-pepper hover:bg-white hover:text-pepper text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-block"
               >
                 BEGIN MET GROEIEN

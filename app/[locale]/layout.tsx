@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { i18n, Locale } from "@/i18n";
+import "../globals.css";
 
-export function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ locale }));
+export async function generateStaticParams() {
+  return [{ locale: "nl" }, { locale: "eng" }];
 }
 
 export default async function LocaleLayout({
@@ -10,21 +10,15 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  
-  // Set lang attribute synchronously before React hydration
-  const langAttribute = locale === "eng" ? "en-GB" : "nl-NL";
-  
+  const { locale } = await params; // ← THIS FIXES THE BUILD ERROR
+
+  const lang = locale === "eng" ? "en-GB" : "nl-NL";
+
   return (
-    <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.lang = "${langAttribute}";`,
-        }}
-      />
+    <div data-locale={lang}>
       {children}
-    </>
+    </div>
   );
 }

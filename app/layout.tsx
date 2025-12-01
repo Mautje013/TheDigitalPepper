@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import StarryBackground from "../components/StarryBackground";
 import ConsentProvider from "../components/ConsentProvider";
+import LocaleLangSetter from "../components/LocaleLangSetter";
 import { defaultMetadata } from "../lib/metadata";
 import { getOrganizationSchema, getWebSiteSchema } from "../lib/structured-data";
 
@@ -24,12 +25,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ 
+  children
+}: { 
+  children: React.ReactNode;
+}) {
   const organizationSchema = getOrganizationSchema();
   const websiteSchema = getWebSiteSchema();
 
   return (
-    <html lang="nl-NL">
+    <html lang="nl-NL" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -45,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${spaceGrotesk.className} text-white antialiased relative`}>
+        <LocaleLangSetter />
         <StarryBackground />
         <ConsentProvider>
           <div className="relative z-10">
@@ -57,3 +63,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

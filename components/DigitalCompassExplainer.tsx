@@ -4,35 +4,79 @@ import { useState } from "react";
 import Image from "next/image";
 import Container from "./Container";
 
-export default function DigitalCompassExplainer() {
+export default function DigitalCompassExplainer({ locale = "nl" }: { locale?: string }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  const pillars = [
-    {
-      id: "foundations",
-      title: "Digital Foundations",
-      shortText: "De technologische basis die elke moderne organisatie nodig heeft.",
-      extendedText: "Wij bouwen de technologische ruggengraat van je organisatie. Met veilige, schaalbare cloud-omgevingen, moderne werkplekken en betrouwbare systemen creëren we een fundament waarop teams sneller, slimmer en foutloos kunnen werken."
+  const pillarsData = {
+    nl: [
+      {
+        id: "foundations",
+        title: "Digital Foundations",
+        shortText: "De technologische basis die elke moderne organisatie nodig heeft.",
+        extendedText: "Wij bouwen de technologische ruggengraat van je organisatie. Met veilige, schaalbare cloud-omgevingen, moderne werkplekken en betrouwbare systemen creëren we een fundament waarop teams sneller, slimmer en foutloos kunnen werken."
+      },
+      {
+        id: "intelligence",
+        title: "Data & Intelligence",
+        shortText: "Van ruwe data naar inzichten die beslissingen en groei versnellen.",
+        extendedText: "Wij maken data bruikbaar, begrijpelijk en waardevol. Van dashboards tot voorspellende modellen: we geven organisaties het inzicht en de intelligentie om sneller te beslissen, risico's te verkleinen en groei te versnellen."
+      },
+      {
+        id: "experience",
+        title: "Digital Experience & Growth",
+        shortText: "Digitale zichtbaarheid, conversie en klantbeleving als groeimotor.",
+        extendedText: "Wij bouwen digitale ervaringen die groeien. Met slimme funnels, conversie-optimalisatie, content en performance marketing creëren wij journeys die klanten aantrekken, activeren en terug laten komen."
+      },
+      {
+        id: "strategy",
+        title: "Strategy, AI & Enablement",
+        shortText: "Strategie, innovatie en adoptie die organisaties klaar maken voor de toekomst.",
+        extendedText: "Wij zorgen dat technologie gedragen wordt door mensen. Met adoptie, training, AI-workflows en verandermanagement versnellen we digitale transformatie. Zo worden teams wendbaar, data-gedreven en klaar voor de toekomst."
+      }
+    ],
+    eng: [
+      {
+        id: "foundations",
+        title: "Digital Foundations",
+        shortText: "The technological foundation every modern organization needs.",
+        extendedText: "We build the technological backbone of your organization. With secure, scalable cloud environments, modern workplaces, and reliable systems, we create a foundation on which teams can work faster, smarter, and error-free."
+      },
+      {
+        id: "intelligence",
+        title: "Data & Intelligence",
+        shortText: "From raw data to insights that accelerate decisions and growth.",
+        extendedText: "We make data usable, understandable, and valuable. From dashboards to predictive models: we give organizations the insight and intelligence to decide faster, reduce risks, and accelerate growth."
+      },
+      {
+        id: "experience",
+        title: "Digital Experience & Growth",
+        shortText: "Digital visibility, conversion, and customer experience as growth drivers.",
+        extendedText: "We build digital experiences that grow. With smart funnels, conversion optimization, content, and performance marketing, we create journeys that attract, activate, and bring customers back."
+      },
+      {
+        id: "strategy",
+        title: "Strategy, AI & Enablement",
+        shortText: "Strategy, innovation, and adoption that prepare organizations for the future.",
+        extendedText: "We ensure technology is embraced by people. With adoption, training, AI workflows, and change management, we accelerate digital transformation. Teams become agile, data-driven, and ready for the future."
+      }
+    ],
+  };
+
+  const introText = {
+    nl: {
+      paragraph1: "The Digital Compass™ biedt organisaties een helder kader om digitale groei te versnellen. Het model combineert strategie, data, technologie en adoptie in één samenhangend kompas dat richting geeft — ongeacht waar een organisatie zich bevindt in haar digitale reis.",
+      paragraph2: "Versterk je bedrijf door te focussen op vier essentiële gebieden die duurzame en meetbare groei stimuleren.",
+      conclusion: "Vind richting voor je digitale transformatie.",
     },
-    {
-      id: "intelligence",
-      title: "Data & Intelligence",
-      shortText: "Van ruwe data naar inzichten die beslissingen en groei versnellen.",
-      extendedText: "Wij maken data bruikbaar, begrijpelijk en waardevol. Van dashboards tot voorspellende modellen: we geven organisaties het inzicht en de intelligentie om sneller te beslissen, risico's te verkleinen en groei te versnellen."
+    eng: {
+      paragraph1: "The Digital Compass™ provides organizations with a clear framework to accelerate digital growth. The model combines strategy, data, technology, and adoption into one cohesive compass that provides direction — regardless of where an organization is in its digital journey.",
+      paragraph2: "Strengthen your business by focusing on four essential areas that drive sustainable and measurable growth.",
+      conclusion: "Find direction for your digital transformation.",
     },
-    {
-      id: "experience",
-      title: "Digital Experience & Growth",
-      shortText: "Digitale zichtbaarheid, conversie en klantbeleving als groeimotor.",
-      extendedText: "Wij bouwen digitale ervaringen die groeien. Met slimme funnels, conversie-optimalisatie, content en performance marketing creëren wij journeys die klanten aantrekken, activeren en terug laten komen."
-    },
-    {
-      id: "strategy",
-      title: "Strategy, AI & Enablement",
-      shortText: "Strategie, innovatie en adoptie die organisaties klaar maken voor de toekomst.",
-      extendedText: "Wij zorgen dat technologie gedragen wordt door mensen. Met adoptie, training, AI-workflows en verandermanagement versnellen we digitale transformatie. Zo worden teams wendbaar, data-gedreven en klaar voor de toekomst."
-    }
-  ];
+  };
+
+  const pillars = pillarsData[locale as keyof typeof pillarsData] || pillarsData.nl;
+  const intro = introText[locale as keyof typeof introText] || introText.nl;
 
   return (
     <section id="digital-compass-explainer" className="py-16 md:py-24 relative">
@@ -46,10 +90,10 @@ export default function DigitalCompassExplainer() {
           {/* Two paragraphs below title */}
           <div className="space-y-4 text-white leading-relaxed mb-12 max-w-3xl mx-auto">
             <p className="text-base md:text-lg lg:text-xl font-semibold">
-              The Digital Compass™ biedt organisaties een helder kader om digitale groei te versnellen. Het model combineert strategie, data, technologie en adoptie in één samenhangend kompas dat richting geeft — ongeacht waar een organisatie zich bevindt in haar digitale reis.
+              {intro.paragraph1}
             </p>
             <p className="text-base md:text-lg lg:text-xl font-semibold">
-              Versterk je bedrijf door te focussen op vier essentiële gebieden die duurzame en meetbare groei stimuleren.
+              {intro.paragraph2}
             </p>
           </div>
 
@@ -138,7 +182,7 @@ export default function DigitalCompassExplainer() {
 
           {/* Concluding text at bottom - Animated fade */}
           <p className="text-white mt-12 text-xl md:text-2xl animate-fade-shine">
-            Vind richting voor je digitale transformatie.
+            {intro.conclusion}
           </p>
         </div>
       </Container>

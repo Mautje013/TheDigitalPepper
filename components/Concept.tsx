@@ -3,47 +3,83 @@
 import { useState } from "react";
 import Container from "./Container";
 
-export default function Concept() {
+export default function Concept({ locale = "nl" }: { locale?: string }) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const benefits = [
-    {
-      icon: (
+  const text = {
+    nl: {
+      header: "De voordelen van een Digital Compass-",
+      headerHighlight: "partnership",
+      subtitle: "Bedrijven kiezen voor ons door onze strategische aanpak en bewezen vermogen om groei te realiseren.",
+      benefits: [
+        {
+          title: "Kompas, geen rapport",
+          description: "Wij leveren geen dikke presentaties die in een la verdwijnen. Met The Digital Compass™ vertalen we jouw ambities naar een scherpe digitale koers mét concrete initiatieven, prioriteiten en ROI-inschatting, klaar om morgen mee te sturen."
+        },
+        {
+          title: "Customer oriented transformatie",
+          description: "Wij bouwen digitale groei \"outside-in\": vanuit de klant naar binnen. Customer experience vormt het hart van elke verandering. Zo sluiten je producten en diensten vlekkeloos aan op de verwachtingen, frustraties en behoeften van je klanten."
+        },
+        {
+          title: "Eén regisseur, meerdere experts",
+          description: "We werken samen met jouw bestaande leveranciers én gespecialiseerde partners. Jij houdt één aanspreekpunt: wij orkestreren techniek, marketing en change, bewaken samenhang en zorgen dat plannen in de praktijk wérken."
+        },
+        {
+          title: "Kompas als ritme, niet als project",
+          description: "Digitale groei is geen sprint. Met kwartaal- of halfjaarlijkse Compass-sessies herijken we prioriteiten, sturen we op data en scherpen we je roadmap bij. Zo bouw je aan een systeem dat jaar op jaar beter presteert."
+        }
+      ]
+    },
+    eng: {
+      header: "The benefits of a Digital Compass",
+      headerHighlight: "partnership",
+      subtitle: "Companies choose us for our strategic approach and proven ability to realize growth.",
+      benefits: [
+        {
+          title: "Compass, not report",
+          description: "We don't deliver thick presentations that disappear in a drawer. With The Digital Compass™, we translate your ambitions into a sharp digital course with concrete initiatives, priorities, and ROI estimates, ready to steer with tomorrow."
+        },
+        {
+          title: "Customer-oriented transformation",
+          description: "We build digital growth \"outside-in\": from the customer inward. Customer experience forms the heart of every change. This way, your products and services seamlessly align with the expectations, frustrations, and needs of your customers."
+        },
+        {
+          title: "One director, multiple experts",
+          description: "We work together with your existing suppliers and specialized partners. You keep one point of contact: we orchestrate technology, marketing, and change, monitor coherence, and ensure plans work in practice."
+        },
+        {
+          title: "Compass as rhythm, not as project",
+          description: "Digital growth is not a sprint. With quarterly or semi-annual Compass sessions, we reassess priorities, steer based on data, and refine your roadmap. This way, you build a system that performs better year after year."
+        }
+      ]
+    }
+  };
+
+  const t = text[locale as keyof typeof text] || text.nl;
+
+  const benefits = t.benefits.map((benefit, index) => ({
+    icon: (
+      index === 0 ? (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
         </svg>
-      ),
-      title: "Kompas, geen rapport",
-      description: "Wij leveren geen dikke presentaties die in een la verdwijnen. Met The Digital Compass™ vertalen we jouw ambities naar een scherpe digitale koers mét concrete initiatieven, prioriteiten en ROI-inschatting, klaar om morgen mee te sturen."
-    },
-    {
-      icon: (
+      ) : index === 1 ? (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
         </svg>
-      ),
-      title: "Customer oriented transformatie",
-      description: "Wij bouwen digitale groei \"outside-in\": vanuit de klant naar binnen. Customer experience vormt het hart van elke verandering. Zo sluiten je producten en diensten vlekkeloos aan op de verwachtingen, frustraties en behoeften van je klanten."
-    },
-    {
-      icon: (
+      ) : index === 2 ? (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
         </svg>
-      ),
-      title: "Eén regisseur, meerdere experts",
-      description: "We werken samen met jouw bestaande leveranciers én gespecialiseerde partners. Jij houdt één aanspreekpunt: wij orkestreren techniek, marketing en change, bewaken samenhang en zorgen dat plannen in de praktijk wérken."
-    },
-    {
-      icon: (
+      ) : (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.94" />
         </svg>
-      ),
-      title: "Kompas als ritme, niet als project",
-      description: "Digitale groei is geen sprint. Met kwartaal- of halfjaarlijkse Compass-sessies herijken we prioriteiten, sturen we op data en scherpen we je roadmap bij. Zo bouw je aan een systeem dat jaar op jaar beter presteert."
-    }
-  ];
+      )
+    ),
+    title: benefit.title,
+    description: benefit.description
+  }));
 
   return (
     <section className="relative overflow-hidden pt-16 md:pt-24 pb-40 md:pb-64">
@@ -233,10 +269,10 @@ export default function Concept() {
         {/* Header */}
         <div className="mb-12 px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
-            De voordelen van een Digital Compass-<span className="text-pepper">partnership</span>
+            {t.header} <span className="text-pepper">{t.headerHighlight}</span>
           </h2>
           <p className="mt-4 text-gray-200 max-w-2xl mx-auto text-lg leading-relaxed">
-            Bedrijven kiezen voor ons door onze strategische aanpak en bewezen vermogen om groei te realiseren.
+            {t.subtitle}
           </p>
         </div>
 

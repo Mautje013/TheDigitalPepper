@@ -168,12 +168,20 @@ function CarouselRow({
   services,
   rowIndex,
   speed = 0.5,
-  onServiceHover
+  onServiceHover,
+  localePrefix,
+  getServiceLink,
+  getTranslatedTooltip,
+  getTranslatedPillarTitle
 }: {
   services: string[];
   rowIndex: number;
   speed?: number;
   onServiceHover?: (pillarTitle: string | null) => void;
+  localePrefix?: string;
+  getServiceLink?: (service: string) => string;
+  getTranslatedTooltip?: (service: string) => string;
+  getTranslatedPillarTitle?: (service: string) => string | null;
 }) {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -226,9 +234,9 @@ function CarouselRow({
     >
       {services.map((service, index) => {
         const isHovered = hoveredIndex === index;
-        const link = serviceLinks[service] || "#";
-        const pillarTitle = serviceToPillar[service] || null;
-        const tooltip = serviceTooltips[service] || "";
+        const link = getServiceLink ? getServiceLink(service) : (serviceLinks[service] || "#");
+        const pillarTitle = getTranslatedPillarTitle ? getTranslatedPillarTitle(service) : (serviceToPillar[service] || null);
+        const tooltip = getTranslatedTooltip ? getTranslatedTooltip(service) : (serviceTooltips[service] || "");
 
         return (
           <div
@@ -353,6 +361,7 @@ const mainServices = [
 function getServiceIcon(title: string) {
   switch (title) {
     case "Waar Groeien Moeiteloos Wordt":
+    case "Where Growth Becomes Effortless":
     case "Digital Foundations":
       // Server stack / Cloud infrastructure icon - represents foundational technology infrastructure
       return (
@@ -371,6 +380,7 @@ function getServiceIcon(title: string) {
         </svg>
       );
     case "Zie Vandaag Wat Morgen Brengt":
+    case "See Today What Tomorrow Brings":
     case "Data & Intelligence":
       // Analytics graph icon - represents data analysis and intelligence
       return (
@@ -389,6 +399,7 @@ function getServiceIcon(title: string) {
         </svg>
       );
     case "Ervaar Wat Digitale Groei Echt Doet":
+    case "Experience What Digital Growth Really Does":
     case "Digital Experience & Growth":
       // Rocket launch icon - represents growth and digital experience acceleration
       return (
@@ -403,6 +414,7 @@ function getServiceIcon(title: string) {
         />
       );
     case "Stuur Je Toekomst. Niet Andersom.":
+    case "Steer Your Future. Not The Other Way Around.":
     case "Strategy, AI & Enablement":
       // Compass icon - represents strategic direction and navigation
       return (
@@ -526,11 +538,260 @@ function ServiceCard({
   );
 }
 
-export default function Features() {
+// Translation data
+const translations = {
+  nl: {
+    header: {
+      title: "Hoe we digitale",
+      titleHighlight: "groei",
+      titleEnd: "realiseren",
+      subtitle: "Met The Digital Compass™ begeleiden we organisaties naar digitale groei met structuur, helderheid en resultaat.",
+    },
+    services: {
+      row1: ["Cloudmigratie", "Schaalbare cloud hosting", "Security & toegang", "Back-up & herstel", "Slimmer vergaderen (VC-space)", "Kostenoptimalisatie", "Dashboarding", "Data-analyse", "KPI-tracking", "Rapportautomatisering"],
+      row2: ["Data-integraties", "Datamodellering", "Process automation", "Website bouwen", "SEO & SEA", "Conversie-optimalisatie", "Marketing automation", "Digitale marketing", "Customer journeys", "Digitale strategie"],
+      row3: ["AI-workflows", "AI-adoptie", "Innovatieadvies", "Workshops & trainingen", "Change support", "Vendorselectie", "IT-planning"],
+    },
+    mainServices: [
+      {
+        title: "Waar Groeien Moeiteloos Wordt",
+        originalTitle: "Digital Foundations",
+        desc: "Wij helpen organisaties met een schaalbare, veilige en moderne digitale basis. Denk aan cloudmigratie, schaalbare hosting, securitybeleid, netwerkarchitectuur, identiteitsbeheer en een efficiënte digitale werkomgeving waarin teams zonder frictie kunnen presteren.",
+        link: "/diensten/digital-foundations",
+        subservices: ["Cloud & infrastructuur", "Moderne werkplek", "Integraties", "Automatisering", "Health checks"]
+      },
+      {
+        title: "Zie Vandaag Wat Morgen Brengt",
+        originalTitle: "Data & Intelligence",
+        desc: "We transformeren data naar actie. Met datamodellen, dashboards, KPI-tracking, automatisering en integraties geven we teams realtime inzicht, voorspellende kracht en de tools om sneller betere beslissingen te nemen.",
+        link: "/diensten/data-intelligence",
+        subservices: ["Dashboards", "KPI-rapportages", "Data centralisatie", "Analytics", "Data-audits"]
+      },
+      {
+        title: "Ervaar Wat Digitale Groei Echt Doet",
+        originalTitle: "Digital Experience & Growth",
+        desc: "Voor organisaties die willen groeien via digitale kanalen. Wij bouwen conversiegerichte websites, optimaliseren customer journeys, koppelen marketingdata en ontwikkelen slimme content, funnels en automation die zichtbaarheid én resultaat vergroten.",
+        link: "/diensten/digital-experience-growth",
+        subservices: ["Marketing & weboplossingen", "Customer journeys", "Automations", "Training & adoptie", "Content & conversie"]
+      },
+      {
+        title: "Stuur Je Toekomst. Niet Andersom.",
+        originalTitle: "Strategy, AI & Enablement",
+        desc: "Wij begeleiden organisaties in strategie, digitale transformatie en AI-enablement. Met roadmapontwikkeling, AI-workflows, change management en training zorgen we dat teams klaar zijn voor de toekomst — met adoptie die écht werkt.",
+        link: "/diensten/strategy-ai-enablement",
+        subservices: ["Digitale strategie", "Roadmapping", "IT-governance", "Virtual CIO", "Security baseline"]
+      },
+    ],
+    tooltips: {
+      "Cloudmigratie": "Verplaats systemen veilig en efficiënt naar de cloud.",
+      "Schaalbare cloud hosting": "Hosting die moeiteloos meegroeit met je organisatie.",
+      "Security & toegang": "Zorg voor veilige toegang en sterke digitale bescherming.",
+      "Back-up & herstel": "Automatische back-ups en snelle recovery wanneer nodig.",
+      "Slimmer vergaderen (VC-space)": "Professionele, efficiënte setups voor hybride meetings.",
+      "Kostenoptimalisatie": "Bespaar op cloud- en licentiekosten zonder functies te verliezen.",
+      "Dashboarding": "Direct inzicht in prestaties via interactieve dashboards.",
+      "Data-analyse": "Ontdek patronen en kansen in je bedrijfsdata.",
+      "KPI-tracking": "Meet wat ertoe doet en stuur bij op resultaten.",
+      "Rapportautomatisering": "Rapportsystemen die zichzelf updaten.",
+      "Data-integraties": "Tools koppelen zodat data automatisch stroomt.",
+      "Datamodellering": "Een stevig datamodel dat klaar is voor groei.",
+      "Process automation": "Automatiseer workflows en bespaar tijd.",
+      "Website bouwen": "Snelle, converterende websites.",
+      "SEO & SEA": "Betere vindbaarheid en slimme advertenties.",
+      "Conversie-optimalisatie": "Maximaliseer resultaten uit bestaande bezoekers.",
+      "Marketing automation": "Geautomatiseerde funnels en flows.",
+      "Digitale marketing": "Strategie + content voor online groei.",
+      "Customer journeys": "Inspirerende en converterende klantreizen.",
+      "Digitale strategie": "Een roadmap die technologie koppelt aan groei.",
+      "AI-workflows": "Werkprocessen versterken met slimme AI.",
+      "AI-adoptie": "Teams helpen AI veilig te gebruiken.",
+      "Innovatieadvies": "Selectie van juiste tools en technologie.",
+      "Workshops & trainingen": "Teams digitaal sterker maken.",
+      "Change support": "Begeleiding bij digitale verandering.",
+      "Vendorselectie": "Hulp bij kiezen van tools en partners.",
+      "IT-planning": "Groeiplanning voor IT en digitale systemen.",
+    },
+    pillarTitles: {
+      "Cloudmigratie": "Waar Groeien Moeiteloos Wordt",
+      "Schaalbare cloud hosting": "Waar Groeien Moeiteloos Wordt",
+      "Security & toegang": "Waar Groeien Moeiteloos Wordt",
+      "Back-up & herstel": "Waar Groeien Moeiteloos Wordt",
+      "Slimmer vergaderen (VC-space)": "Waar Groeien Moeiteloos Wordt",
+      "Kostenoptimalisatie": "Waar Groeien Moeiteloos Wordt",
+      "Dashboarding": "Zie Vandaag Wat Morgen Brengt",
+      "Data-analyse": "Zie Vandaag Wat Morgen Brengt",
+      "KPI-tracking": "Zie Vandaag Wat Morgen Brengt",
+      "Rapportautomatisering": "Zie Vandaag Wat Morgen Brengt",
+      "Data-integraties": "Zie Vandaag Wat Morgen Brengt",
+      "Datamodellering": "Zie Vandaag Wat Morgen Brengt",
+      "Process automation": "Zie Vandaag Wat Morgen Brengt",
+      "Website bouwen": "Ervaar Wat Digitale Groei Echt Doet",
+      "SEO & SEA": "Ervaar Wat Digitale Groei Echt Doet",
+      "Conversie-optimalisatie": "Ervaar Wat Digitale Groei Echt Doet",
+      "Marketing automation": "Ervaar Wat Digitale Groei Echt Doet",
+      "Digitale marketing": "Ervaar Wat Digitale Groei Echt Doet",
+      "Customer journeys": "Ervaar Wat Digitale Groei Echt Doet",
+      "Digitale strategie": "Stuur Je Toekomst. Niet Andersom.",
+      "AI-workflows": "Stuur Je Toekomst. Niet Andersom.",
+      "AI-adoptie": "Stuur Je Toekomst. Niet Andersom.",
+      "Innovatieadvies": "Stuur Je Toekomst. Niet Andersom.",
+      "Workshops & trainingen": "Stuur Je Toekomst. Niet Andersom.",
+      "Change support": "Stuur Je Toekomst. Niet Andersom.",
+      "Vendorselectie": "Stuur Je Toekomst. Niet Andersom.",
+      "IT-planning": "Stuur Je Toekomst. Niet Andersom.",
+    },
+  },
+  eng: {
+    header: {
+      title: "How we realize digital",
+      titleHighlight: "growth",
+      titleEnd: "",
+      subtitle: "With The Digital Compass™, we guide organizations toward digital growth with structure, clarity, and results.",
+    },
+    services: {
+      row1: ["Cloud Migration", "Scalable Cloud Hosting", "Security & Access", "Backup & Recovery", "Smarter Meetings (VC-space)", "Cost Optimization", "Dashboarding", "Data Analysis", "KPI Tracking", "Report Automation"],
+      row2: ["Data Integrations", "Data Modeling", "Process Automation", "Website Building", "SEO & SEA", "Conversion Optimization", "Marketing Automation", "Digital Marketing", "Customer Journeys", "Digital Strategy"],
+      row3: ["AI Workflows", "AI Adoption", "Innovation Advisory", "Workshops & Training", "Change Support", "Vendor Selection", "IT Planning"],
+    },
+    mainServices: [
+      {
+        title: "Where Growth Becomes Effortless",
+        originalTitle: "Digital Foundations",
+        desc: "We help organizations with a scalable, secure, and modern digital foundation. Think cloud migration, scalable hosting, security policies, network architecture, identity management, and an efficient digital work environment where teams can perform without friction.",
+        link: "/services/digital-foundations",
+        subservices: ["Cloud & Infrastructure", "Modern Workplace", "Integrations", "Automation", "Health Checks"]
+      },
+      {
+        title: "See Today What Tomorrow Brings",
+        originalTitle: "Data & Intelligence",
+        desc: "We transform data into action. With data models, dashboards, KPI tracking, automation, and integrations, we give teams real-time insight, predictive power, and the tools to make better decisions faster.",
+        link: "/services/data-intelligence",
+        subservices: ["Dashboards", "KPI Reports", "Data Centralization", "Analytics", "Data Audits"]
+      },
+      {
+        title: "Experience What Digital Growth Really Does",
+        originalTitle: "Digital Experience & Growth",
+        desc: "For organizations that want to grow through digital channels. We build conversion-focused websites, optimize customer journeys, connect marketing data, and develop smart content, funnels, and automation that increase visibility and results.",
+        link: "/services/digital-experience-growth",
+        subservices: ["Marketing & Web Solutions", "Customer Journeys", "Automations", "Training & Adoption", "Content & Conversion"]
+      },
+      {
+        title: "Steer Your Future. Not The Other Way Around.",
+        originalTitle: "Strategy, AI & Enablement",
+        desc: "We guide organizations in strategy, digital transformation, and AI enablement. With roadmap development, AI workflows, change management, and training, we ensure teams are ready for the future — with adoption that really works.",
+        link: "/services/strategy-ai-enablement",
+        subservices: ["Digital Strategy", "Roadmapping", "IT Governance", "Virtual CIO", "Security Baseline"]
+      },
+    ],
+    tooltips: {
+      "Cloud Migration": "Move systems safely and efficiently to the cloud.",
+      "Scalable Cloud Hosting": "Hosting that effortlessly grows with your organization.",
+      "Security & Access": "Ensure secure access and strong digital protection.",
+      "Backup & Recovery": "Automatic backups and fast recovery when needed.",
+      "Smarter Meetings (VC-space)": "Professional, efficient setups for hybrid meetings.",
+      "Cost Optimization": "Save on cloud and license costs without losing features.",
+      "Dashboarding": "Direct insight into performance via interactive dashboards.",
+      "Data Analysis": "Discover patterns and opportunities in your business data.",
+      "KPI Tracking": "Measure what matters and adjust based on results.",
+      "Report Automation": "Reporting systems that update themselves.",
+      "Data Integrations": "Connect tools so data flows automatically.",
+      "Data Modeling": "A solid data model ready for growth.",
+      "Process Automation": "Automate workflows and save time.",
+      "Website Building": "Fast, converting websites.",
+      "SEO & SEA": "Better visibility and smart advertising.",
+      "Conversion Optimization": "Maximize results from existing visitors.",
+      "Marketing Automation": "Automated funnels and flows.",
+      "Digital Marketing": "Strategy + content for online growth.",
+      "Customer Journeys": "Inspiring and converting customer journeys.",
+      "Digital Strategy": "A roadmap that connects technology to growth.",
+      "AI Workflows": "Strengthen work processes with smart AI.",
+      "AI Adoption": "Help teams use AI safely.",
+      "Innovation Advisory": "Selection of the right tools and technology.",
+      "Workshops & Training": "Make teams digitally stronger.",
+      "Change Support": "Guidance in digital change.",
+      "Vendor Selection": "Help choosing tools and partners.",
+      "IT Planning": "Growth planning for IT and digital systems.",
+    },
+    pillarTitles: {
+      "Cloud Migration": "Where Growth Becomes Effortless",
+      "Scalable Cloud Hosting": "Where Growth Becomes Effortless",
+      "Security & Access": "Where Growth Becomes Effortless",
+      "Backup & Recovery": "Where Growth Becomes Effortless",
+      "Smarter Meetings (VC-space)": "Where Growth Becomes Effortless",
+      "Cost Optimization": "Where Growth Becomes Effortless",
+      "Dashboarding": "See Today What Tomorrow Brings",
+      "Data Analysis": "See Today What Tomorrow Brings",
+      "KPI Tracking": "See Today What Tomorrow Brings",
+      "Report Automation": "See Today What Tomorrow Brings",
+      "Data Integrations": "See Today What Tomorrow Brings",
+      "Data Modeling": "See Today What Tomorrow Brings",
+      "Process Automation": "See Today What Tomorrow Brings",
+      "Website Building": "Experience What Digital Growth Really Does",
+      "SEO & SEA": "Experience What Digital Growth Really Does",
+      "Conversion Optimization": "Experience What Digital Growth Really Does",
+      "Marketing Automation": "Experience What Digital Growth Really Does",
+      "Digital Marketing": "Experience What Digital Growth Really Does",
+      "Customer Journeys": "Experience What Digital Growth Really Does",
+      "Digital Strategy": "Steer Your Future. Not The Other Way Around.",
+      "AI Workflows": "Steer Your Future. Not The Other Way Around.",
+      "AI Adoption": "Steer Your Future. Not The Other Way Around.",
+      "Innovation Advisory": "Steer Your Future. Not The Other Way Around.",
+      "Workshops & Training": "Steer Your Future. Not The Other Way Around.",
+      "Change Support": "Steer Your Future. Not The Other Way Around.",
+      "Vendor Selection": "Steer Your Future. Not The Other Way Around.",
+      "IT Planning": "Steer Your Future. Not The Other Way Around.",
+    },
+  },
+};
+
+export default function Features({ locale = "nl" }: { locale?: string }) {
   const [highlightedPillar, setHighlightedPillar] = useState<string | null>(null);
+  const t = translations[locale as keyof typeof translations] || translations.nl;
+  const localePrefix = locale === "eng" ? "/services" : "/diensten";
 
   const handleServiceHover = (pillarTitle: string | null) => {
     setHighlightedPillar(pillarTitle);
+  };
+
+  // Service key mapping (index-based to map between languages)
+  const serviceKeys = [
+    // Row 1
+    "Cloudmigratie", "Schaalbare cloud hosting", "Security & toegang", "Back-up & herstel", "Slimmer vergaderen (VC-space)", "Kostenoptimalisatie", "Dashboarding", "Data-analyse", "KPI-tracking", "Rapportautomatisering",
+    // Row 2
+    "Data-integraties", "Datamodellering", "Process automation", "Website bouwen", "SEO & SEA", "Conversie-optimalisatie", "Marketing automation", "Digitale marketing", "Customer journeys", "Digitale strategie",
+    // Row 3
+    "AI-workflows", "AI-adoptie", "Innovatieadvies", "Workshops & trainingen", "Change support", "Vendorselectie", "IT-planning"
+  ];
+
+  // Get service key from translated service name
+  const getServiceKey = (translatedService: string) => {
+    const allServices = [...t.services.row1, ...t.services.row2, ...t.services.row3];
+    const index = allServices.indexOf(translatedService);
+    return index >= 0 ? serviceKeys[index] : translatedService;
+  };
+
+  // Create service links with locale prefix
+  const getServiceLink = (service: string) => {
+    const serviceKey = getServiceKey(service);
+    const baseLink = serviceLinks[serviceKey] || "#";
+    if (baseLink === "#") return "#";
+    return baseLink.replace("/diensten", localePrefix);
+  };
+
+  // Get translated tooltip
+  const getTranslatedTooltip = (service: string) => {
+    return t.tooltips[service as keyof typeof t.tooltips] || "";
+  };
+
+  // Get translated pillar title
+  const getTranslatedPillarTitle = (service: string) => {
+    return t.pillarTitles[service as keyof typeof t.pillarTitles] || null;
+  };
+
+  // Get services for carousel
+  const getCarouselServices = () => {
+    const services = [...t.services.row1, ...t.services.row2, ...t.services.row3];
+    return [...services, ...services, ...services];
   };
 
   return (
@@ -540,19 +801,19 @@ export default function Features() {
         {/* Section header */}
         <div className="mb-12 px-6">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
-            Hoe we digitale <span className="text-pepper">groei</span> realiseren
+            {t.header.title} <span className="text-pepper">{t.header.titleHighlight}</span> {t.header.titleEnd}
           </h2>
           <p className="mt-4 text-gray-200 max-w-2xl text-lg leading-relaxed">
-            Met The Digital Compass™ begeleiden we organisaties naar digitale groei met structuur, helderheid en resultaat.
+            {t.header.subtitle}
           </p>
         </div>
 
         {/* Main Service Cards - 2x2 Grid */}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 mb-16">
-          {mainServices.map((item, index) => (
+          {t.mainServices.map((item, index) => (
             <ServiceCard 
               key={item.title} 
-              item={item} 
+              item={{...item, link: item.link.replace("/diensten", localePrefix)}} 
               index={index}
               isHighlighted={highlightedPillar === item.title}
             />
@@ -566,26 +827,38 @@ export default function Features() {
         <div className="relative overflow-hidden space-y-3 py-6">
           {/* Row 1 - scrolls left to right */}
           <CarouselRow 
-            services={allServicesRow1} 
+            services={[...t.services.row1, ...t.services.row1, ...t.services.row1]} 
             rowIndex={1} 
             speed={isMobile() ? 1.2 : 0.6}
             onServiceHover={handleServiceHover}
+            localePrefix={localePrefix}
+            getServiceLink={getServiceLink}
+            getTranslatedTooltip={getTranslatedTooltip}
+            getTranslatedPillarTitle={getTranslatedPillarTitle}
           />
 
           {/* Row 2 - scrolls right to left (negative speed) */}
           <CarouselRow 
-            services={allServicesRow2} 
+            services={[...t.services.row2, ...t.services.row2, ...t.services.row2]} 
             rowIndex={2} 
             speed={isMobile() ? -1.2 : -0.6}
             onServiceHover={handleServiceHover}
+            localePrefix={localePrefix}
+            getServiceLink={getServiceLink}
+            getTranslatedTooltip={getTranslatedTooltip}
+            getTranslatedPillarTitle={getTranslatedPillarTitle}
           />
 
           {/* Row 3 - scrolls left to right */}
           <CarouselRow 
-            services={allServicesRow3} 
+            services={[...t.services.row3, ...t.services.row3, ...t.services.row3]} 
             rowIndex={3} 
             speed={isMobile() ? 1.2 : 0.6}
             onServiceHover={handleServiceHover}
+            localePrefix={localePrefix}
+            getServiceLink={getServiceLink}
+            getTranslatedTooltip={getTranslatedTooltip}
+            getTranslatedPillarTitle={getTranslatedPillarTitle}
           />
 
           {/* Gradient fade edges */}

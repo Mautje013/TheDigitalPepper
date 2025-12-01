@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import Script from "next/script";
 
-export default function ContactClient() {
+export default function ContactEnglish() {
   return (
     <>
       <Script
@@ -12,10 +11,10 @@ export default function ContactClient() {
         async
       />
       <div className="mx-auto max-w-4xl px-4 md:px-6 py-16 text-center">
-        <h1 className="text-3xl md:text-5xl font-extrabold">Plan een kennismaking</h1>
+        <h1 className="text-3xl md:text-5xl font-extrabold">Schedule a meeting</h1>
         <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
-          Kies een moment dat voor jou past — het gesprek is gratis en vrijblijvend.  
-          We bespreken waar je nu staat, wat je doelen zijn en welke digitale oplossingen passen bij jouw business.
+          Choose a time that works for you — the conversation is free and without obligation.  
+          We'll discuss where you are now, what your goals are, and which digital solutions fit your business.
         </p>
 
         <div

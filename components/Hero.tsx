@@ -1,4 +1,26 @@
-export default function Hero() {
+import Link from "next/link";
+
+export default function Hero({ locale = "nl" }: { locale?: string }) {
+  const text = {
+    nl: {
+      title: "Jouw Reis naar Datagedreven",
+      titleHighlight: "Groei",
+      titleEnd: "Begint Hier",
+      subtitle: "Wij begeleiden groeiende bedrijven naar helderheid, structuur en meetbare resultaten met The Digital Compass™.",
+      cta: "BEGIN MET GROEIEN",
+    },
+    eng: {
+      title: "Your Journey to Data-Driven",
+      titleHighlight: "Growth",
+      titleEnd: "Starts Here",
+      subtitle: "We guide growing businesses toward clarity, structure, and measurable results with The Digital Compass™.",
+      cta: "START GROWING",
+    },
+  };
+
+  const t = text[locale as keyof typeof text] || text.nl;
+  const contactHref = `/${locale}/contact`;
+
   return (
     <section className="relative flex items-center justify-center min-h-screen overflow-hidden text-white" style={{ backgroundColor: '#010000' }}>
       
@@ -25,20 +47,20 @@ export default function Hero() {
           {/* Left-aligned Header & Subheader */}
           <div className="text-left">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight tracking-tight animate-fade-in text-white mb-6" style={{ wordSpacing: '-0.05em' }}>
-              Jouw Reis naar Datagedreven <span className="text-pepper">Groei</span> Begint Hier
+              {t.title} <span className="text-pepper">{t.titleHighlight}</span> {t.titleEnd}
             </h1>
             <h2 className="text-base md:text-lg lg:text-xl font-semibold text-gray-300 animate-slide-up [animation-delay:0.1s] leading-relaxed mb-8">
-              Wij begeleiden groeiende bedrijven naar helderheid, structuur en meetbare resultaten met The Digital Compass™.
+              {t.subtitle}
             </h2>
 
             {/* CTA Button - Under subheader */}
             <div className="animate-slide-up [animation-delay:0.3s]">
-              <a
-                href="https://digitalpepper.nl/contact/"
+              <Link
+                href={contactHref}
                 className="bg-pepper hover:bg-white hover:text-pepper text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-block"
               >
-                BEGIN MET GROEIEN
-              </a>
+                {t.cta}
+              </Link>
             </div>
           </div>
         </div>

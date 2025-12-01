@@ -1,15 +1,56 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useConsent } from "./ConsentProvider";
 
-export default function CookieBanner() {
+export default function CookieBanner({ locale }: { locale?: string }) {
+  const params = useParams();
+  const currentLocale = (locale || (params.locale as string)) || "nl";
   const { setPreferences, setShowBanner } = useConsent();
   const [showDetails, setShowDetails] = useState(false);
   const [localPreferences, setLocalPreferences] = useState({
     analytics: false,
     marketing: false,
   });
+
+  const text = {
+    nl: {
+      title: "Cookievoorkeuren",
+      message: "Wij gebruiken cookies om je ervaring te verbeteren, onze website te analyseren en gepersonaliseerde content te tonen. Je kunt je voorkeuren beheren via de instellingen hieronder.",
+      necessaryTitle: "Noodzakelijke cookies",
+      necessaryDesc: "Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld.",
+      analyticsTitle: "Analytische cookies",
+      analyticsDesc: "Helpen ons begrijpen hoe bezoekers de website gebruiken.",
+      marketingTitle: "Marketing cookies",
+      marketingDesc: "Gebruikt voor gepersonaliseerde advertenties en tracking.",
+      hideDetails: "Verberg details",
+      managePreferences: "Voorkeuren beheren",
+      accept: "Alles accepteren",
+      decline: "Weigeren",
+      save: "Voorkeuren opslaan",
+      readMore: "Lees meer",
+    },
+    eng: {
+      title: "Cookie Preferences",
+      message: "We use cookies to improve your experience, analyze our website, and show personalized content. You can manage your preferences via the settings below.",
+      necessaryTitle: "Essential cookies",
+      necessaryDesc: "These cookies are essential for the website to function and cannot be disabled.",
+      analyticsTitle: "Analytical cookies",
+      analyticsDesc: "Help us understand how visitors use the website.",
+      marketingTitle: "Marketing cookies",
+      marketingDesc: "Used for personalized advertisements and tracking.",
+      hideDetails: "Hide details",
+      managePreferences: "Manage preferences",
+      accept: "Accept all",
+      decline: "Decline",
+      save: "Save preferences",
+      readMore: "Read more",
+    },
+  };
+
+  const t = text[currentLocale as keyof typeof text] || text.nl;
 
   const handleAcceptAll = () => {
     setPreferences({
@@ -43,21 +84,20 @@ export default function CookieBanner() {
             {/* Content */}
             <div className="flex-1 text-gray-300">
               <h3 className="text-lg font-semibold text-white mb-2">
-                Cookievoorkeuren
+                {t.title}
               </h3>
               <p className="text-sm leading-relaxed mb-4">
-                Wij gebruiken cookies om je ervaring te verbeteren, onze website te analyseren en gepersonaliseerde content te tonen. 
-                Je kunt je voorkeuren beheren via de instellingen hieronder.
+                {t.message}
               </p>
 
               {showDetails && (
                 <div className="mt-4 space-y-4 text-sm">
                   <div>
                     <h4 className="font-semibold text-white mb-2">
-                      Noodzakelijke cookies
+                      {t.necessaryTitle}
                     </h4>
                     <p className="text-gray-400">
-                      Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld.
+                      {t.necessaryDesc}
                     </p>
                   </div>
 
@@ -76,10 +116,10 @@ export default function CookieBanner() {
                       />
                       <div>
                         <h4 className="font-semibold text-white">
-                          Analytische cookies
+                          {t.analyticsTitle}
                         </h4>
                         <p className="text-gray-400 text-xs">
-                          Helpen ons begrijpen hoe bezoekers de website gebruiken.
+                          {t.analyticsDesc}
                         </p>
                       </div>
                     </label>
@@ -100,10 +140,10 @@ export default function CookieBanner() {
                       />
                       <div>
                         <h4 className="font-semibold text-white">
-                          Marketing cookies
+                          {t.marketingTitle}
                         </h4>
                         <p className="text-gray-400 text-xs">
-                          Gebruikt voor gepersonaliseerde advertenties en tracking.
+                          {t.marketingDesc}
                         </p>
                       </div>
                     </label>
@@ -111,12 +151,20 @@ export default function CookieBanner() {
                 </div>
               )}
 
-              <button
-                onClick={() => setShowDetails(!showDetails)}
-                className="text-sm text-red-400 hover:text-red-300 transition mt-2"
-              >
-                {showDetails ? "Verberg details" : "Voorkeuren beheren"}
-              </button>
+              <div className="flex items-center gap-4 mt-2">
+                <button
+                  onClick={() => setShowDetails(!showDetails)}
+                  className="text-sm text-red-400 hover:text-red-300 transition"
+                >
+                  {showDetails ? t.hideDetails : t.managePreferences}
+                </button>
+                <Link 
+                  href={`/${currentLocale}/cookiebeleid`}
+                  className="text-sm text-red-400 hover:text-red-300 transition"
+                >
+                  {t.readMore}
+                </Link>
+              </div>
             </div>
 
             {/* Buttons */}
@@ -127,13 +175,13 @@ export default function CookieBanner() {
                     onClick={handleRejectAll}
                     className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition text-sm whitespace-nowrap"
                   >
-                    Weigeren
+                    {t.decline}
                   </button>
                   <button
                     onClick={handleSavePreferences}
                     className="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition text-sm whitespace-nowrap"
                   >
-                    Voorkeuren opslaan
+                    {t.save}
                   </button>
                 </>
               ) : (
@@ -142,13 +190,13 @@ export default function CookieBanner() {
                     onClick={handleRejectAll}
                     className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition text-sm whitespace-nowrap"
                   >
-                    Weigeren
+                    {t.decline}
                   </button>
                   <button
                     onClick={handleAcceptAll}
                     className="px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition text-sm whitespace-nowrap"
                   >
-                    Alles accepteren
+                    {t.accept}
                   </button>
                 </>
               )}
@@ -159,4 +207,3 @@ export default function CookieBanner() {
     </div>
   );
 }
-

@@ -1,0 +1,268 @@
+{
+  "nav": {
+    "home": "Home",
+    "expertise": "Expertise",
+    "contact": "Contact"
+  },
+  "hero": {
+    "titleBefore": "Your Journey to Data-driven",
+    "titleHighlight": "Growth",
+    "titleAfter": "Starts Here",
+    "sub": "We guide growing companies to clarity, structure and measurable results with The Digital Compass™.",
+    "cta": "START GROWING"
+  },
+  "brandWall": {
+    "heading": "Brands we're proud to work with",
+    "sub": "From SMBs to established names — we build digital growth for organisations that want to move forward."
+  }
+  ,
+  "features": {
+    "header": {
+      "titleBefore": "How we create digital",
+      "titleHighlight": "growth",
+      "titleAfter": "",
+      "sub": "With The Digital Compass™ we guide organisations to digital growth with structure, clarity and measurable results."
+    },
+    "pillars": {
+      "foundations": {
+        "title": "Where Growth Happens Effortlessly",
+        "desc": "We help organisations build a scalable, secure and modern digital foundation — cloud migration, hosting, security, identity and efficient work environments.",
+        "subservices": ["Cloud & infrastructure","Modern workplace","Integrations","Automation","Health checks"]
+      },
+      "data": {
+        "title": "See Today What Tomorrow Brings",
+        "desc": "We turn data into action: datamodels, dashboards, KPI tracking and integrations that give teams real-time insight and predictive power.",
+        "subservices": ["Dashboards","KPI reports","Data centralisation","Analytics","Data audits"]
+      },
+      "growth": {
+        "title": "Experience What Digital Growth Really Does",
+        "desc": "For organisations that want growth through digital channels. We build conversion-focused websites, optimise journeys and create automation that increases visibility and results.",
+        "subservices": ["Marketing & web solutions","Customer journeys","Automations","Training & adoption","Content & conversion"]
+      },
+      "strategy": {
+        "title": "Steer Your Future. Not The Other Way Around.",
+        "desc": "We guide organisations in strategy, digital transformation and AI enablement with roadmaps, AI workflows and change management for real adoption.",
+        "subservices": ["Digital strategy","Roadmapping","IT governance","Virtual CIO","Security baseline"]
+      }
+    }
+  },
+  "services": {
+    "labels": {
+      "Cloudmigratie": "Cloud migration",
+      "Schaalbare cloud hosting": "Scalable cloud hosting",
+      "Security & toegang": "Security & access",
+      "Back-up & herstel": "Backup & recovery",
+      "Slimmer vergaderen (VC-space)": "Smarter meetings (VC-space)",
+      "Kostenoptimalisatie": "Cost optimization",
+      "Dashboarding": "Dashboarding",
+      "Data-analyse": "Data analysis",
+      "KPI-tracking": "KPI tracking",
+      "Rapportautomatisering": "Report automation",
+      "Data-integraties": "Data integrations",
+      "Datamodellering": "Data modelling",
+      "Process automation": "Process automation",
+      "Website bouwen": "Website building",
+      "SEO & SEA": "SEO & SEA",
+      "Conversie-optimalisatie": "Conversion optimization",
+      "Marketing automation": "Marketing automation",
+      "Digitale marketing": "Digital marketing",
+      "Customer journeys": "Customer journeys",
+      "Digitale strategie": "Digital strategy",
+      "AI-workflows": "AI workflows",
+      "AI-adoptie": "AI adoption",
+      "Innovatieadvies": "Innovation advice",
+      "Workshops & trainingen": "Workshops & training",
+      "Change support": "Change support",
+      "Vendorselectie": "Vendor selection",
+      "IT-planning": "IT planning"
+    },
+    "tooltips": {
+      "Cloudmigratie": "Move systems securely and efficiently to the cloud.",
+      "Schaalbare cloud hosting": "Hosting that scales effortlessly with your organisation.",
+      "Security & toegang": "Ensure secure access and strong digital protection.",
+      "Back-up & herstel": "Automatic backups and fast recovery when needed.",
+      "Slimmer vergaderen (VC-space)": "Professional, efficient setups for hybrid meetings.",
+      "Kostenoptimalisatie": "Save on cloud and licensing costs without losing functionality.",
+      "Dashboarding": "Immediate insight via interactive dashboards.",
+      "Data-analyse": "Discover patterns and opportunities in your business data.",
+      "KPI-tracking": "Measure what matters and steer towards results.",
+      "Rapportautomatisering": "Reporting systems that update themselves.",
+      "Data-integraties": "Connect tools so data flows automatically.",
+      "Datamodellering": "A solid data model ready for growth.",
+      "Process automation": "Automate workflows and save time.",
+      "Website bouwen": "Fast, converting websites.",
+      "SEO & SEA": "Better findability and smart advertising.",
+      "Conversie-optimalisatie": "Maximise results from existing visitors.",
+      "Marketing automation": "Automated funnels and flows.",
+      "Digitale marketing": "Strategy + content for online growth.",
+      "Customer journeys": "Inspiring and converting customer journeys.",
+      "Digitale strategie": "A roadmap that connects technology to growth.",
+      "AI-workflows": "Enhance processes with smart AI.",
+      "AI-adoptie": "Help teams use AI safely.",
+      "Innovatieadvies": "Selection of the right tools and technology.",
+      "Workshops & trainingen": "Make teams digitally stronger.",
+      "Change support": "Guidance during digital change.",
+      "Vendorselectie": "Assistance choosing tools and partners.",
+      "IT-planning": "Growth planning for IT and digital systems."
+    },
+    "pillars": {
+      "Cloudmigratie": "Where Growth Happens Effortlessly",
+      "Schaalbare cloud hosting": "Where Growth Happens Effortlessly",
+      "Security & toegang": "Where Growth Happens Effortlessly",
+      "Back-up & herstel": "Where Growth Happens Effortlessly",
+      "Slimmer vergaderen (VC-space)": "Where Growth Happens Effortlessly",
+      "Kostenoptimalisatie": "Where Growth Happens Effortlessly",
+      "Dashboarding": "See Today What Tomorrow Brings",
+      "Data-analyse": "See Today What Tomorrow Brings",
+      "KPI-tracking": "See Today What Tomorrow Brings",
+      "Rapportautomatisering": "See Today What Tomorrow Brings",
+      "Data-integraties": "See Today What Tomorrow Brings",
+      "Datamodellering": "See Today What Tomorrow Brings",
+      "Process automation": "See Today What Tomorrow Brings",
+      "Website bouwen": "Experience What Digital Growth Really Does",
+      "SEO & SEA": "Experience What Digital Growth Really Does",
+      "Conversie-optimalisatie": "Experience What Digital Growth Really Does",
+      "Marketing automation": "Experience What Digital Growth Really Does",
+      "Digitale marketing": "Experience What Digital Growth Really Does",
+      "Customer journeys": "Experience What Digital Growth Really Does",
+      "Digitale strategie": "Steer Your Future. Not The Other Way Around.",
+      "AI-workflows": "Steer Your Future. Not The Other Way Around.",
+      "AI-adoptie": "Steer Your Future. Not The Other Way Around.",
+      "Innovatieadvies": "Steer Your Future. Not The Other Way Around.",
+      "Workshops & trainingen": "Steer Your Future. Not The Other Way Around.",
+      "Change support": "Steer Your Future. Not The Other Way Around.",
+      "Vendorselectie": "Steer Your Future. Not The Other Way Around.",
+      "IT-planning": "Steer Your Future. Not The Other Way Around."
+    }
+    ,
+    "compassCta": {
+      "heading": "The first step towards your digital future",
+      "sub": "You're one step away from insights that can deliver months of growth.",
+      "primaryCta": "Start the Digital Compass Scan",
+      "secondaryCta": "Have questions?",
+      "trust": ["No obligation & fast","Concrete insight into your digital strength","Helps prioritise effectively"]
+    }
+    ,
+    "footer": {
+      "copyright": "© 2025 The Digital Pepper",
+      "links": {
+        "disclaimer": "Disclaimer",
+        "privacy": "Privacy",
+        "cookies": "Cookies",
+        "cookiePrefs": "Change cookie preferences"
+      }
+    }
+  }
+  ,
+  "process": {
+    "heading": "How we work — fast, clear and result-driven",
+    "step1": {
+      "title": "Intake (20–30 min)",
+      "body": "Goals, context and current setup. We provide direction and immediate input."
+    },
+    "step2": {
+      "title": "Quick Scan",
+      "body": "A short analysis of your channels, tooling and data to determine the highest-impact opportunities."
+    },
+    "step3": {
+      "title": "Custom Proposal",
+      "body": "Clear scope, timeline and investment — no surprises, just informed choices."
+    },
+    "step4": {
+      "title": "Implementation & Growth",
+      "body": "Sprints with measurable outcomes. Transparent reporting and clear next steps."
+    },
+    "note": "* We work transparently and without hidden costs. Each step is discussed in advance."
+  },
+
+  "contactCta": {
+    "heading": "Let's get acquainted",
+    "sub": "Curious what digital growth could mean for your organisation? Schedule an introductory call and discover the possibilities.",
+    "cta": "Have questions?",
+    "email": "Send an email"
+  },
+
+  "contactPage": {
+    "heading": "Schedule a conversation",
+    "sub": "Choose a time that works for you — the conversation is free and without obligation. We discuss where you are now, what your goals are, and what digital solutions fit your business."
+  },
+
+  "cookies": {
+    "title": "Cookie Preferences",
+    "intro": "We use cookies to improve your experience, analyse our website and show personalised content. You can manage your preferences using the settings below.",
+    "essential": {
+      "title": "Essential Cookies",
+      "desc": "These cookies are essential for the website to function and cannot be disabled."
+    },
+    "analytics": {
+      "title": "Analytical Cookies",
+      "desc": "Help us understand how visitors use the website."
+    },
+    "marketing": {
+      "title": "Marketing Cookies",
+      "desc": "Used for personalised ads and tracking."
+    },
+    "toggleDetails": {
+      "show": "Manage preferences",
+      "hide": "Hide details"
+    },
+    "save": "Save preferences"
+  },
+
+  "concept": {
+    "partnership": "The benefits of a Digital Compass partnership",
+    "subtitle": "Companies choose us for our strategic approach and proven ability to deliver growth.",
+    "benefits": [
+      {
+        "title": "Compass, not report",
+        "desc": "We don't deliver thick presentations that disappear in a drawer. With The Digital Compass™ we translate your ambitions into a clear digital course with concrete initiatives, priorities and ROI estimates, ready to guide tomorrow."
+      },
+      {
+        "title": "Customer-oriented transformation",
+        "desc": "We build digital growth 'outside-in': from the customer inward. Customer experience is at the heart of every change. This way your products and services seamlessly align with customer expectations, frustrations and needs."
+      },
+      {
+        "title": "One director, multiple experts",
+        "desc": "We collaborate with your existing vendors and specialised partners. You have one point of contact: we orchestrate technology, marketing and change, maintain coherence and ensure plans work in practice."
+      },
+      {
+        "title": "Compass as rhythm, not as project",
+        "desc": "Digital transformation isn't a project with an endpoint — it's an ongoing rhythm. The Digital Compass evolves with you, quarter after quarter, ensuring your strategy stays sharp and execution stays on track."
+      }
+    ]
+  },
+
+  "digitalCompassExplainer": {
+    "intro": "The Digital Compass™ offers organisations a clear framework to accelerate digital growth. The model combines strategy, data, technology and adoption into one coherent compass that provides direction — regardless of where an organisation stands in its digital journey.",
+    "direction": "Find direction for your digital transformation.",
+    "pillars": {
+      "foundations": {
+        "title": "Digital Foundations",
+        "short": "A robust, scalable technology foundation.",
+        "extended": "We help you build a modern technology foundation that grows with you. From cloud migration to security, integrations to automation — we lay the groundwork for everything else to scale."
+      },
+      "data": {
+        "title": "Data & Intelligence",
+        "short": "Raw data transformed into insights that accelerate decision-making and growth.",
+        "extended": "We make data usable, understandable and valuable. From dashboards to predictive models: we give organisations the insight and intelligence to decide faster, reduce risks and accelerate growth."
+      },
+      "growth": {
+        "title": "Digital Experience & Growth",
+        "short": "Digital channels that drive measurable results.",
+        "extended": "We build digital growth 'outside-in': from the customer inward. Customer experience is the heart of every change. Your products and services align seamlessly with customer expectations and needs, driving conversion and loyalty."
+      },
+      "strategy": {
+        "title": "Strategy, AI & Enablement",
+        "short": "Strategy, innovation and adoption that prepare organisations for the future.",
+        "extended": "We ensure technology is embraced by people. With adoption, training, AI workflows and change management we accelerate digital transformation. Teams become agile, data-driven and ready for the future."
+      }
+    }
+  },
+
+  "digitalCompassIntro": {
+    "heading": "The Digital Compass™",
+    "subheading": "Your roadmap for modern, scalable digital growth.",
+    "intro": "Digital growth can feel overwhelming: dozens of tools, fragmented processes, technical noise. The Digital Compass™ brings clarity and direction. It's a clear model that shows where an organisation stands now, which digital steps take priority and how technology, data, marketing and AI form one coherent whole.",
+    "compass": "The compass consists of four interconnected pillars that every digital organisation needs — from solid technical foundations to smart data, from digital growth to future-ready strategy.",
+    "structure": "With the Digital Compass™ you make digital choices no longer on gut feeling, but on a clear, proven structure."
+  }

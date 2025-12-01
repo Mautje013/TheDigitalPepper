@@ -4,39 +4,86 @@ import { useState } from "react";
 import Image from "next/image";
 import Container from "./Container";
 
-const journeySteps = [
-  {
-    id: "discover",
-    number: "①",
-    header: "Discover",
-    subtitle: "Helderheid zonder aannames",
-    body: "We starten met de Digital Compass QuickScan: een gestructureerde analyse die duidelijk maakt waar jouw organisatie digitaal staat. Je krijgt inzicht per quadrant: waar sterktes liggen, waar risico's ontstaan en welke thema's directe aandacht verdienen."
-  },
-  {
-    id: "design",
-    number: "②",
-    header: "Design",
-    subtitle: "Een roadmap die uitvoerbaar én haalbaar is",
-    body: "Tijdens een gerichte werksessie of verdiepende sprint vertalen we ambities naar concrete prioriteiten. We brengen kansen, afhankelijkheden en ROI in kaart en maken een digitale roadmap die richting geeft zonder te overbelasten."
-  },
-  {
-    id: "implement",
-    number: "③",
-    header: "Implement",
-    subtitle: "Eén regisseur, meerdere experts",
-    body: "Wij verbinden strategie met uitvoering. Marketing, IT, data en change worden gecoördineerd vanuit één regiepunt. Jij behoudt overzicht; wij bewaken voortgang, kwaliteit en samenhang."
-  },
-  {
-    id: "evolve",
-    number: "④",
-    header: "Evolve",
-    subtitle: "Groei als doorlopend ritme",
-    body: "Met periodieke Compass-sessies evalueren we voortgang, actualiseren we prioriteiten en sturen we op basis van data. We scherpen de roadmap aan en zorgen dat de digitale ontwikkeling van de organisatie niet stilvalt."
-  }
-];
-
-export default function ApproachComparison() {
+export default function ApproachComparison({ locale = "nl" }: { locale?: string }) {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  const text = {
+    nl: {
+      header: "Hoe organisaties door de Digital Compass",
+      headerHighlight: "Journey",
+      headerEnd: "gaan",
+      subtitle: "Van eerste inzicht tot blijvende digitale groei, een proces dat richting, rust en resultaat brengt.",
+      journeySteps: [
+        {
+          id: "discover",
+          number: "①",
+          header: "Discover",
+          subtitle: "Helderheid zonder aannames",
+          body: "We starten met de Digital Compass QuickScan: een gestructureerde analyse die duidelijk maakt waar jouw organisatie digitaal staat. Je krijgt inzicht per quadrant: waar sterktes liggen, waar risico's ontstaan en welke thema's directe aandacht verdienen."
+        },
+        {
+          id: "design",
+          number: "②",
+          header: "Design",
+          subtitle: "Een roadmap die uitvoerbaar én haalbaar is",
+          body: "Tijdens een gerichte werksessie of verdiepende sprint vertalen we ambities naar concrete prioriteiten. We brengen kansen, afhankelijkheden en ROI in kaart en maken een digitale roadmap die richting geeft zonder te overbelasten."
+        },
+        {
+          id: "implement",
+          number: "③",
+          header: "Implement",
+          subtitle: "Eén regisseur, meerdere experts",
+          body: "Wij verbinden strategie met uitvoering. Marketing, IT, data en change worden gecoördineerd vanuit één regiepunt. Jij behoudt overzicht; wij bewaken voortgang, kwaliteit en samenhang."
+        },
+        {
+          id: "evolve",
+          number: "④",
+          header: "Evolve",
+          subtitle: "Groei als doorlopend ritme",
+          body: "Met periodieke Compass-sessies evalueren we voortgang, actualiseren we prioriteiten en sturen we op basis van data. We scherpen de roadmap aan en zorgen dat de digitale ontwikkeling van de organisatie niet stilvalt."
+        }
+      ]
+    },
+    eng: {
+      header: "How organizations go through the Digital Compass",
+      headerHighlight: "Journey",
+      headerEnd: "",
+      subtitle: "From first insight to lasting digital growth, a process that brings direction, peace, and results.",
+      journeySteps: [
+        {
+          id: "discover",
+          number: "①",
+          header: "Discover",
+          subtitle: "Clarity without assumptions",
+          body: "We start with the Digital Compass QuickScan: a structured analysis that clarifies where your organization stands digitally. You get insight per quadrant: where strengths lie, where risks arise, and which themes deserve immediate attention."
+        },
+        {
+          id: "design",
+          number: "②",
+          header: "Design",
+          subtitle: "A roadmap that is executable and achievable",
+          body: "During a focused work session or in-depth sprint, we translate ambitions into concrete priorities. We map opportunities, dependencies, and ROI and create a digital roadmap that provides direction without overloading."
+        },
+        {
+          id: "implement",
+          number: "③",
+          header: "Implement",
+          subtitle: "One director, multiple experts",
+          body: "We connect strategy with execution. Marketing, IT, data, and change are coordinated from one control point. You maintain overview; we monitor progress, quality, and coherence."
+        },
+        {
+          id: "evolve",
+          number: "④",
+          header: "Evolve",
+          subtitle: "Growth as an ongoing rhythm",
+          body: "With periodic Compass sessions, we evaluate progress, update priorities, and steer based on data. We refine the roadmap and ensure the organization's digital development doesn't stall."
+        }
+      ]
+    }
+  };
+
+  const t = text[locale as keyof typeof text] || text.nl;
+  const journeySteps = t.journeySteps;
 
   return (
     <section className="relative overflow-hidden pt-0 pb-16 md:pb-24">
@@ -238,10 +285,10 @@ export default function ApproachComparison() {
         {/* Section Header */}
         <div className="mb-12 px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
-            Hoe organisaties door de Digital Compass <span className="text-pepper">Journey</span> gaan
+            {t.header} <span className="text-pepper">{t.headerHighlight}</span> {t.headerEnd}
           </h2>
           <p className="mt-4 text-gray-200/70 max-w-2xl mx-auto text-lg leading-relaxed">
-            Van eerste inzicht tot blijvende digitale groei, een proces dat richting, rust en resultaat brengt.
+            {t.subtitle}
           </p>
         </div>
 

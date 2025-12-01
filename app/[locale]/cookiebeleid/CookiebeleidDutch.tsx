@@ -1,17 +1,4 @@
-import type { Metadata } from "next";
-import { generateMetadata as seoMetadata } from "../../components/SEO";
-
-export const metadata: Metadata = seoMetadata({
-  title: "Cookiebeleid",
-  description: "Bekijk welke cookies TheDigitalPepper gebruikt en hoe jij jouw voorkeuren beheert.",
-  url: "https://thedigitalpepper.com/cookiebeleid",
-  canonical: "https://thedigitalpepper.com/cookiebeleid",
-});
-
-// Revalidate static pages every 24 hours
-export const revalidate = 86400;
-
-export default function Cookiebeleid() {
+export default function CookiebeleidDutch() {
   return (
     <div className="max-w-3xl mx-auto py-20 px-4 text-gray-300">
       <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">Cookiebeleid</h1>
@@ -105,4 +92,3 @@ export default function Cookiebeleid() {
     </div>
   );
 }
-

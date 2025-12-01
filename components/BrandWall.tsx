@@ -1,19 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Container from "./Container";
+import LogoRotator from "./LogoRotator";
 
-const logos = [
-  { src: "/logo1.png", alt: "Partner logo 1", applyFilter: true, removeWhiteBg: false },
-  { src: "/logo2.png", alt: "Partner logo 2", applyFilter: false, removeWhiteBg: false },
-  { src: "/logo3.png", alt: "Partner logo 3", applyFilter: true, removeWhiteBg: false },
-  { src: "/logo5.png", alt: "Partner logo 5", applyFilter: false, removeWhiteBg: false },
-  { src: "/logo6.png", alt: "Partner logo 6", applyFilter: false, removeWhiteBg: false },
-  { src: "/logo7.png", alt: "Partner logo 7", applyFilter: false, removeWhiteBg: false },
-  { src: "/logo8.png", alt: "Partner logo 8", applyFilter: false, removeWhiteBg: false },
-];
-
-export default function BrandWall() {
+export default function BrandWall({ locale = "nl" }: { locale?: string }) {
   return (
     <section className="relative overflow-hidden pt-16 pb-0 md:pt-24">
       <div className="absolute inset-0 pointer-events-none" style={{ paddingBottom: '8rem', marginBottom: '-8rem' }}>
@@ -202,68 +192,24 @@ export default function BrandWall() {
         {/* Header */}
         <div className="mb-12 px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-4">
-            Merken waar we met <span className="text-pepper">trots</span> mee samenwerken
+            {locale === "eng" ? (
+              <>Brands we work with <span className="text-pepper">pride</span></>
+            ) : (
+              <>Merken waar we met <span className="text-pepper">trots</span> mee samenwerken</>
+            )}
           </h2>
           <p className="mt-4 text-gray-200 max-w-2xl mx-auto text-lg leading-relaxed">
-            Van mkb tot gevestigde namen — wij bouwen digitale groei voor organisaties die vooruit willen.
+            {locale === "eng" 
+              ? "From SMEs to established names — we build digital growth for organizations that want to move forward."
+              : "Van mkb tot gevestigde namen — wij bouwen digitale groei voor organisaties die vooruit willen."
+            }
           </p>
         </div>
 
-        {/* Logo Grid: 2-3-2 layout */}
-        <div className="flex flex-col items-center gap-6 md:gap-8 relative z-10">
-          {/* Row 1: 2 logos */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-4xl justify-items-center">
-            {logos.slice(0, 2).map((logo, index) => (
-              <LogoCard key={index} logo={logo} index={index} />
-            ))}
-          </div>
-
-          {/* Row 2: 3 logos */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-5xl justify-items-center">
-            {logos.slice(2, 5).map((logo, index) => (
-              <LogoCard key={index + 2} logo={logo} index={index + 2} />
-            ))}
-          </div>
-
-          {/* Row 3: 2 logos */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-4xl justify-items-center">
-            {logos.slice(5, 7).map((logo, index) => (
-              <LogoCard key={index + 5} logo={logo} index={index + 5} />
-            ))}
-          </div>
-        </div>
+        {/* Logo Rotator */}
+        <LogoRotator />
       </Container>
     </section>
-  );
-}
-
-function LogoCard({ logo, index }: { logo: typeof logos[0]; index: number }) {
-  return (
-    <div
-      className="group relative p-16 rounded-xl border border-white/10 bg-white/5 hover:bg-white/30 hover:backdrop-blur-sm hover:border-white/40 transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_30px_rgba(255,0,0,0.4),0_0_60px_rgba(255,0,0,0.2),inset_0_0_20px_rgba(255,255,255,0.15)] flex items-center justify-center opacity-0 animate-slide-up w-full max-w-[582px]"
-      style={{
-        animationDelay: `${index * 0.1}s`,
-        animationFillMode: 'forwards',
-      }}
-    >
-      <div className="flex items-center justify-center h-28">
-        <Image
-          src={logo.src}
-          alt={logo.alt}
-          width={200}
-          height={100}
-          className="h-28 w-auto md:h-32 mx-auto object-contain transition-all duration-300 group-hover:scale-105"
-          style={logo.applyFilter 
-            ? { filter: 'invert(1) brightness(0) invert(1)' } 
-            : logo.removeWhiteBg
-            ? { 
-                mixBlendMode: 'multiply'
-              }
-            : {}
-          }
-        />
-      </div>
-    </div>
   );
 }
 

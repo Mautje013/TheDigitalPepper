@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Container from "./Container";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,6 +15,8 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const params = useParams();
+  const locale = (params?.locale as string) || "nl";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,7 +34,7 @@ export default function Navbar() {
     >
       <Container className="py-3">
         <nav className="flex items-center justify-between">
-          <Link href="/" className="font-extrabold text-lg">
+          <Link href={`/${locale}`} className="font-extrabold text-lg">
             TheDigitalPepper<span className="text-pepper">🌶️</span>
           </Link>
 
@@ -44,58 +47,62 @@ export default function Navbar() {
             Menu
           </button>
 
-          <ul className="hidden md:flex items-center gap-6">
-            {links.map(({ href, label, cta, scrollTo }) => {
-              const active = pathname === href;
-              const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-                if (scrollTo && pathname === "/") {
-                  e.preventDefault();
-                  const element = document.getElementById(scrollTo);
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+          <div className="hidden md:flex items-center gap-6">
+            <ul className="flex items-center gap-6">
+              {links.map(({ href, label, cta, scrollTo }) => {
+                const localeHref = `/${locale}${href}`;
+                const active = pathname === localeHref || (href === "/" && pathname === `/${locale}`);
+                const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+                  if (scrollTo && (pathname === `/${locale}` || pathname === `/${locale}/`)) {
+                    e.preventDefault();
+                    const element = document.getElementById(scrollTo);
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
                   }
-                }
-              };
+                };
 
-              if (cta) {
+                if (cta) {
+                  return (
+                    <li key={href}>
+                      <Link
+                        href={localeHref}
+                        prefetch={true}
+                        className="rounded-xl bg-pepper text-slate-950 px-4 py-2 font-semibold hover:brightness-95"
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  );
+                }
                 return (
                   <li key={href}>
                     <Link
-                      href={href}
+                      href={localeHref}
+                      onClick={handleClick}
                       prefetch={true}
-                      className="rounded-xl bg-pepper text-slate-950 px-4 py-2 font-semibold hover:brightness-95"
+                      className={`
+                        relative text-sm font-medium tracking-wide uppercase
+                        transition-all duration-300 ease-out
+                        ${active 
+                          ? "text-pepper" 
+                          : "text-gray-300 hover:text-pepper"
+                        }
+                        before:absolute before:bottom-[-4px] before:left-0 before:w-0 before:h-[2px]
+                        before:bg-gradient-to-r before:from-pepper before:to-pepper-light
+                        before:transition-all before:duration-300
+                        hover:before:w-full
+                        ${active ? "before:w-full" : ""}
+                      `}
                     >
                       {label}
                     </Link>
                   </li>
                 );
-              }
-              return (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    onClick={handleClick}
-                    prefetch={true}
-                    className={`
-                      relative text-sm font-medium tracking-wide uppercase
-                      transition-all duration-300 ease-out
-                      ${active 
-                        ? "text-pepper" 
-                        : "text-gray-300 hover:text-pepper"
-                      }
-                      before:absolute before:bottom-[-4px] before:left-0 before:w-0 before:h-[2px]
-                      before:bg-gradient-to-r before:from-pepper before:to-pepper-light
-                      before:transition-all before:duration-300
-                      hover:before:w-full
-                      ${active ? "before:w-full" : ""}
-                    `}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+              })}
+            </ul>
+            <LanguageSwitcher />
+          </div>
         </nav>
 
         {open && (
@@ -104,8 +111,9 @@ export default function Navbar() {
             className="md:hidden mt-3 grid gap-2 rounded-xl border border-white/10 p-3 bg-slate-900/70"
           >
             {links.map(({ href, label, cta, scrollTo }) => {
+              const localeHref = `/${locale}${href}`;
               const handleMobileClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-                if (scrollTo && pathname === "/") {
+                if (scrollTo && (pathname === `/${locale}` || pathname === `/${locale}/`)) {
                   e.preventDefault();
                   setOpen(false);
                   const element = document.getElementById(scrollTo);
@@ -120,7 +128,7 @@ export default function Navbar() {
               return (
                 <li key={href}>
                   <Link
-                    href={href}
+                    href={localeHref}
                     onClick={handleMobileClick}
                     prefetch={true}
                     className={
@@ -134,6 +142,9 @@ export default function Navbar() {
                 </li>
               );
             })}
+            <li className="pt-2 border-t border-white/10">
+              <LanguageSwitcher />
+            </li>
           </ul>
         )}
       </Container>

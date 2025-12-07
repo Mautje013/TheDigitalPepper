@@ -25,26 +25,20 @@ export default async function LocaleLayout({
           strategy="afterInteractive"
         />
         <Script
-          id="consent-debug"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              gtag('consent', 'update', {
-                ad_storage: 'granted',
-                analytics_storage: 'granted'
-              });
-            `,
-          }}
-        />
-        <Script
           id="ga4-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+
+              gtag('consent', 'default', {
+                ad_storage: 'granted',
+                analytics_storage: 'granted'
+              });
+
               gtag('js', new Date());
-              gtag('config', 'G-6GKDDYJX49');
+              gtag('config', 'G-G6KDDYJX49');
             `,
           }}
         />

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Script from "next/script";
 import "../globals.css";
 
 export async function generateStaticParams() {
@@ -20,29 +19,6 @@ export default async function LocaleLayout({
   return (
     <html lang={lang}>
       <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6GKDDYJX49"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="ga4-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-
-              gtag('consent', 'default', {
-                ad_storage: 'granted',
-                analytics_storage: 'granted'
-              });
-
-              gtag('set', 'debug_mode', true);
-              gtag('js', new Date());
-              gtag('config', 'G-G6KDDYJX49');
-            `,
-          }}
-        />
       </head>
       <body data-locale={lang}>
         {children}

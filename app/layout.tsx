@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="nl-NL" suppressHydrationWarning>
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6GKDDYJX49"
+          src="https://www.googletagmanager.com/gtag/js?id=G-G6KDDYJX49"
           strategy="afterInteractive"
         />
         <Script
@@ -49,7 +49,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-6GKDDYJX49');
+              gtag('config', 'G-G6KDDYJX49');
             `,
           }}
         />

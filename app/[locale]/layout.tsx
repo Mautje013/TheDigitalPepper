@@ -37,6 +37,7 @@ export default async function LocaleLayout({
                 analytics_storage: 'granted'
               });
 
+              gtag('set', 'debug_mode', true);
               gtag('js', new Date());
               gtag('config', 'G-G6KDDYJX49');
             `,

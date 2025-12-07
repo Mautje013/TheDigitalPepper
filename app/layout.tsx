@@ -38,20 +38,24 @@ export default function RootLayout({
     <html lang="nl-NL" suppressHydrationWarning>
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-G6KDDYJX49"
-          strategy="afterInteractive"
-        />
-        <Script
           id="ga4-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', 'G-G6KDDYJX49');
-       `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+
+              gtag('js', new Date());
+              gtag('config', 'G-G6KDDYJX49', {
+                send_page_view: true
+              });
+            `,
           }}
+        />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-G6KDDYJX49"
+          strategy="afterInteractive"
         />
         <script
           type="application/ld+json"
